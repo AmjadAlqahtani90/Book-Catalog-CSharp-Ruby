@@ -94,8 +94,8 @@ Number of books: 1 books
 ```
 
 ## How to Run the Application
-dotnet new install Avalonia.Templates
-dotnet new avalonia.app -o BookCatalogApp
-cd BookCatalogApp
-dotnet build
-dotnet run
+* dotnet new install Avalonia.Templates
+* dotnet new avalonia.app -o BookCatalogApp
+* cd BookCatalogApp
+* dotnet build
+* dotnet run
