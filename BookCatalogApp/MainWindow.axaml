@@ -1,0 +1,212 @@
+<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:BookCatalogApp.Models"
+    x:Class="BookCatalogApp.MainWindow"
+    Title="Book Catalog"
+    Width="900"
+    Height="750">
+
+    <ScrollViewer>
+        <StackPanel Margin="25" Spacing="18">
+
+            <TextBlock
+                Text="Book Cataloging System"
+                FontSize="28"
+                FontWeight="Bold"/>
+
+            <!-- ADD BOOK -->
+
+            <Border
+                Padding="15"
+                BorderThickness="1"
+                CornerRadius="8">
+
+                <StackPanel Spacing="10">
+
+                    <TextBlock
+                        Text="Add Book"
+                        FontSize="20"
+                        FontWeight="Bold"/>
+
+                    <TextBlock Text="Title"/>
+
+                    <TextBox
+                        x:Name="TitleTextBox"
+                        PlaceholderText="Enter book title"/>
+
+                    <TextBlock Text="Author"/>
+
+                    <TextBox
+                        x:Name="AuthorTextBox"
+                        PlaceholderText="Enter author"/>
+
+                    <TextBlock Text="Genre"/>
+
+                    <TextBox
+                        x:Name="GenreTextBox"
+                        PlaceholderText="Enter genre"/>
+
+                    <TextBlock Text="Publication Year"/>
+
+                    <TextBox
+                        x:Name="YearTextBox"
+                        PlaceholderText="Example: 2020"/>
+
+                    <Button
+                        Content="Add Book"
+                        HorizontalAlignment="Left"
+                        Click="AddBook_Click"/>
+
+                </StackPanel>
+
+            </Border>
+
+            <!-- SEARCH -->
+
+            <Border
+                Padding="15"
+                BorderThickness="1"
+                CornerRadius="8">
+
+                <StackPanel Spacing="10">
+
+                    <TextBlock
+                        Text="Search Books"
+                        FontSize="20"
+                        FontWeight="Bold"/>
+
+                    <TextBox
+                        x:Name="SearchTextBox"
+                        PlaceholderText="Enter search text"/>
+
+                    <ComboBox
+                        x:Name="SearchByComboBox"
+                        SelectedIndex="0">
+
+                        <ComboBoxItem Content="Title"/>
+                        <ComboBoxItem Content="Author"/>
+                        <ComboBoxItem Content="Genre"/>
+
+                    </ComboBox>
+
+                    <Button
+                        Content="Search"
+                        HorizontalAlignment="Left"
+                        Click="Search_Click"/>
+
+                </StackPanel>
+
+            </Border>
+
+            <!-- RESULTS -->
+
+            <Border
+                Padding="15"
+                BorderThickness="1"
+                CornerRadius="8">
+
+                <StackPanel Spacing="10">
+
+                    <TextBlock
+                        Text="Search Results"
+                        FontSize="20"
+                        FontWeight="Bold"/>
+
+                    <ListBox
+                        x:Name="BooksListBox"
+                        MinHeight="150">
+
+                        <ListBox.ItemTemplate>
+
+                            <DataTemplate x:DataType="models:Book">
+
+                                <Border
+                                    Padding="10"
+                                    Margin="2"
+                                    BorderThickness="1"
+                                    CornerRadius="5">
+
+                                    <StackPanel>
+
+                                        <TextBlock
+                                            Text="{Binding Title}"
+                                            FontWeight="Bold"
+                                            FontSize="16"/>
+
+                                        <TextBlock
+                                            Text="{Binding Author}"/>
+
+                                        <TextBlock
+                                            Text="{Binding Genre}"/>
+
+                                        <TextBlock
+                                            Text="{Binding PublicationYear}"/>
+
+                                    </StackPanel>
+
+                                </Border>
+
+                            </DataTemplate>
+
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+
+                    <Button
+                        Content="Remove Selected Book"
+                        HorizontalAlignment="Left"
+                        Click="RemoveBook_Click"/>
+
+                </StackPanel>
+
+            </Border>
+
+            <!-- REPORTS -->
+
+            <Border
+                Padding="15"
+                BorderThickness="1"
+                CornerRadius="8">
+
+                <StackPanel Spacing="10">
+
+                    <TextBlock
+                        Text="Reports"
+                        FontSize="20"
+                        FontWeight="Bold"/>
+
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Spacing="10">
+
+                        <Button
+                            Content="Report by Genre"
+                            Click="ReportByGenre_Click"/>
+
+                        <Button
+                            Content="Report by Author"
+                            Click="ReportByAuthor_Click"/>
+
+                    </StackPanel>
+
+                    <TextBox
+                        x:Name="ReportTextBox"
+                        IsReadOnly="True"
+                        AcceptsReturn="True"
+                        TextWrapping="Wrap"
+                        MinHeight="140"/>
+
+                </StackPanel>
+
+            </Border>
+
+            <TextBlock
+                x:Name="StatusTextBlock"
+                FontWeight="Bold"/>
+
+        </StackPanel>
+
+    </ScrollViewer>
+
+</Window>
