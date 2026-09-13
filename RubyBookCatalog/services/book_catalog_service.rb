@@ -7,7 +7,6 @@ class BookCatalogService
     @books = []
   end
 
-  # Add a new book
   def add_book(book)
     duplicate = @books.any? do |existing_book|
       existing_book.title.casecmp?(book.title) &&
@@ -21,7 +20,6 @@ class BookCatalogService
     true
   end
 
-  # Remove a book
   def remove_book(book)
     return false unless @books.include?(book)
 
@@ -29,65 +27,61 @@ class BookCatalogService
     true
   end
 
-  # Search by title
   def search_by_title(title)
     @books.select do |book|
       book.title.downcase.include?(title.downcase)
     end
   end
 
-  # Search by author
   def search_by_author(author)
     @books.select do |book|
       book.author.downcase.include?(author.downcase)
     end
   end
 
-  # Search by genre
   def search_by_genre(genre)
     @books.select do |book|
       book.genre.downcase.include?(genre.downcase)
     end
   end
 
-  # Generate report by genre
   def report_by_genre
-  return "No books." if @books.empty?
+    return "No books." if @books.empty?
 
-  grouped_books = @books.group_by { |book| book.genre }
+    groups = @books.group_by { |book| book.genre }
 
-  grouped_books
-    .sort_by { |genre, _books| genre.downcase }
-    .map do |genre, books|
+    groups
+      .sort_by { |genre, _books| genre.downcase }
+      .map do |genre, books|
 
-      lines = []
+        word = books.length == 1 ? "book" : "books"
 
-      word = books.length == 1 ? "book" : "books"
+        lines = []
+        lines << "Genre: #{genre} (#{books.length} #{word})"
 
-      lines << "Genre: #{genre} (#{books.length} #{word})"
+        books.each do |book|
+          lines << "- Title: #{book.title} | Author: #{book.author} | Year: #{book.publication_year}"
+        end
 
-      books.each do |book|
-        lines << "- Title: #{book.title} | Author: #{book.author} | Year: #{book.publication_year}"
+        lines.join("\n")
       end
+      .join("\n\n")
+  end
 
-      lines.join("\n")
-    end
-    .join("\n\n")
-end
-
-  # Generate report by author
   def report_by_author
     return "No books." if @books.empty?
 
-    grouped_books = @books.group_by { |book| book.author }
+    groups = @books.group_by { |book| book.author }
 
-    grouped_books
+    groups
       .sort_by { |author, _books| author.downcase }
       .map do |author, books|
 
+        word = books.length == 1 ? "book" : "books"
+
         lines = []
         lines << "Author: #{author}"
-        lines << "Number of books: #{books.length}"
+        lines << "Number of books: #{books.length} #{word}"
 
         books.each do |book|
           lines << "- Title: #{book.title} | Genre: #{book.genre} | Year: #{book.publication_year}"
