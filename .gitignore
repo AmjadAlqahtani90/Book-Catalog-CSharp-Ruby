@@ -1,0 +1,13 @@
+# .NET generated files
+**/bin/
+**/obj/
+
+# macOS
+.DS_Store
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+
+# Logs
+*.log
